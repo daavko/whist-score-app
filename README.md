@@ -1,5 +1,7 @@
 # WhistScoreApp
 
+A small web-app for scoring the card game Whist (specifically, the Nomination Whist variant of the game)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.2.
 
 ## Development server

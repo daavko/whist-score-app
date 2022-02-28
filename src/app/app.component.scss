@@ -1,0 +1,29 @@
+@use "src/vendor/ngx-host" as host;
+@use "~@angular/material/theming" as material-theming;
+@use "src/vendor/material-theme-colors" as theme-colors;
+
+@include host.fullheight {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+    // Background for Firefox (it automatically changes the scrollbar color)
+    $background: map-get(theme-colors.$app-theme, background);
+    background-color: material-theming.mat-color($background, background);
+}
+
+mat-toolbar {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    
+    .custom-mat-toolbar-spacer {
+        flex: 1 1 auto;
+    }
+}
+
+.content-container {
+    height: 100%;
+    flex: 1 1;
+    padding: 16px;
+}

@@ -1,0 +1,32 @@
+/*
+Fixes for styles in Angular Material
+These styles are meant to be included in global styles, not in component styles
+ */
+
+@mixin mat-form-field_mat-icon_position {
+    // Fix for mat-form-field mat-icon as suffix, default styles position it wrong
+    body .mat-form-field-appearance-outline .mat-form-field-suffix {
+        top: 2px;
+        align-self: center;
+    }
+}
+
+@mixin mat-drawer-container_background {
+    // Fix for mat-drawer-container having a light grey background
+    .mat-drawer-container {
+        background-color: inherit;
+    }
+}
+
+@mixin mat-form-field_label_line-height {
+    // Fix for too small line-height in mat-form-field labels
+    .mat-form-field-label-wrapper label {
+        line-height: 1.29;
+    }
+}
+
+@mixin all {
+    @include mat-form-field_mat-icon_position;
+    @include mat-drawer-container_background;
+    @include mat-form-field_label_line-height;
+}

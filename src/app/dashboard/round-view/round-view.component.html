@@ -1,0 +1,77 @@
+<div class="top-container">
+    <h2>
+        <span>Turn {{ currentTurnIndex + 1 }} - </span>
+        <ng-container [ngSwitch]="currentTurnPhase">
+            <span *ngSwitchCase="TurnPhase.BIDS">bidding</span>
+            <span *ngSwitchCase="TurnPhase.GAME">game</span>
+            <span *ngSwitchCase="TurnPhase.SCORE">scoring</span>
+        </ng-container>
+    </h2>
+    <h3>
+        <span>{{ currentRound.turns[currentTurnIndex].cardAmount }} cards - </span>
+        <ng-container [ngSwitch]="currentRound.turns[currentTurnIndex].trumpColor">
+            <mat-icon *ngSwitchCase="CardColor.CLUBS" svgIcon="cards-club"></mat-icon>
+            <mat-icon *ngSwitchCase="CardColor.DIAMONDS" svgIcon="cards-diamond"></mat-icon>
+            <mat-icon *ngSwitchCase="CardColor.HEARTS" svgIcon="cards-heart"></mat-icon>
+            <mat-icon *ngSwitchCase="CardColor.SPADES" svgIcon="cards-spade"></mat-icon>
+            <mat-icon *ngSwitchCase="CardColor.NONE" svgIcon="cancel"></mat-icon>
+        </ng-container>
+    </h3>
+</div>
+<div class="rounds-grid">
+    <div class="player-names-row">
+        <p class="player-name bordered"
+           [class.dealer]="player.id === currentRound.turns[currentTurnIndex].dealer.id"
+           *ngFor="let player of currentRound.players">{{ player.name }}</p>
+    </div>
+    <div class="generic-row" *ngIf="currentTurnPhase === TurnPhase.BIDS">
+        <div class="generic-row--cell bordered" *ngFor="let bid of currentRound.turns[currentTurnIndex].bids">
+            <button mat-icon-button (click)="decreaseBidAmount(bid)">
+                <mat-icon svgIcon="minus"></mat-icon>
+            </button>
+            <mat-form-field>
+                <input type="text" matInput [value]="bid.bidAmount.toString()" readonly>
+            </mat-form-field>
+            <button mat-icon-button (click)="increaseBidAmount(bid)">
+                <mat-icon svgIcon="plus"></mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="generic-row" *ngIf="currentTurnPhase === TurnPhase.GAME">
+        <div class="generic-row--cell bordered" *ngFor="let bid of currentRound.turns[currentTurnIndex].bids">
+            <mat-form-field>
+                <input type="text" matInput [value]="bid.bidAmount.toString()" readonly>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="generic-row" *ngIf="currentTurnPhase === TurnPhase.SCORE">
+        <div class="generic-row--cell bordered" *ngFor="let bid of currentRound.turns[currentTurnIndex].bids">
+            <button mat-icon-button (click)="decreaseActualAmount(bid)">
+                <mat-icon svgIcon="minus"></mat-icon>
+            </button>
+            <mat-form-field>
+                <input type="text" matInput [value]="bid.actualAmount.toString()" readonly>
+            </mat-form-field>
+            <button mat-icon-button (click)="increaseActualAmount(bid)">
+                <mat-icon svgIcon="plus"></mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="total-row">
+        <p class="total-score bordered" *ngFor="let player of currentRound.players">{{ sumPlayerScores(player) }}</p>
+    </div>
+</div>
+<div class="buttons-container split">
+    <button mat-stroked-button color="warn" (click)="abandonRound()">Abandon round</button>
+    <div class="buttons-container">
+        <button mat-stroked-button
+                (click)="unAdvanceTurnPhase()"
+                [disabled]="currentTurnIndex === 0 && currentTurnPhase === TurnPhase.BIDS">Un-advance</button>
+        <button mat-stroked-button
+                (click)="advanceTurnPhase()"
+                [disabled]="currentTurnIndex === currentRound.turns.length - 1 && currentTurnPhase === TurnPhase.SCORE">Advance</button>
+        <button mat-stroked-button
+                (click)="finishGame()"
+                [disabled]="currentTurnIndex !== currentRound.turns.length - 1 || currentTurnPhase !== TurnPhase.SCORE">Finish game</button>
+    </div>
+</div>

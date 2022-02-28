@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: [ "./app.component.scss" ]
 })
 export class AppComponent {
-  title = 'whist-score-app';
+
+    constructor(@Inject(DOCUMENT) private document: Document) {}
+
+    public async tryEnterFullscreen(): Promise<void> {
+        await document.documentElement.requestFullscreen();
+    }
 }

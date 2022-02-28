@@ -1,0 +1,15 @@
+<div class="games-grid">
+    <div class="player-names-row">
+        <p class="player-name bordered" *ngFor="let player of players">{{ player.name }}</p>
+    </div>
+    <div class="round-row" *ngFor="let round of rounds">
+        <p class="round-score bordered" *ngFor="let player of players">{{ sumPlayerScoreInRound(player, round) }}</p>
+    </div>
+    <div class="total-row">
+        <p class="total-score bordered" *ngFor="let player of players">{{ sumPlayerScores(player) }}</p>
+    </div>
+</div>
+<div class="buttons-container">
+    <button mat-stroked-button color="warn" (click)="abandonGame()">Abandon game</button>
+    <button mat-stroked-button (click)="startNewRound()">Start next round</button>
+</div>

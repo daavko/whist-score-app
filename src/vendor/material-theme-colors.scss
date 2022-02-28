@@ -1,0 +1,15 @@
+@use "~@angular/material" as material-theming;
+
+// Color hues
+$app-primary: material-theming.define-palette(material-theming.$blue-palette);
+$app-accent: material-theming.define-palette(material-theming.$yellow-palette, A200, A100, A400);
+$app-warn: material-theming.define-palette(material-theming.$deep-orange-palette);
+
+// Theme setup
+$app-theme: material-theming.define-dark-theme((
+    color: (
+        primary: $app-primary,
+        accent: $app-accent,
+        warn: $app-warn,
+    )
+));

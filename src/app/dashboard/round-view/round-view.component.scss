@@ -1,0 +1,119 @@
+@use "src/vendor/ngx-host" as host;
+@use "~@angular/material/theming" as material-theming;
+@use "src/vendor/material-theme-colors" as theme-colors;
+
+@include host.fullheight;
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    
+    mat-icon {
+        vertical-align: middle;
+    }
+}
+
+.rounds-grid {
+    p {
+        margin-bottom: 0;
+    }
+    
+    .bordered {
+        &:not(:first-child) {
+            border-left: 1px solid white;
+        }
+        
+        &:not(:last-child) {
+            border-right: 1px solid white;
+        }
+        
+        &:first-child {
+            border-left: 2px solid white;
+        }
+        
+        &:last-child {
+            border-right: 2px solid white;
+        }
+    }
+    
+    .player-names-row {
+        display: grid;
+        grid-auto-columns: 1fr;
+        
+        .player-name {
+            grid-row: 1;
+            text-align: center;
+            border-block: 1px solid white;
+            line-height: 3;
+        }
+        
+        .dealer {
+            $color-background: material-theming.mat-color(theme-colors.$app-primary, 800);
+            $color-foreground: material-theming.mat-color(theme-colors.$app-primary, 100);
+            background: transparentize($color-background, 0.75);
+            color: lighten($color-foreground, 7.5%);
+        }
+    }
+    
+    .generic-row {
+        display: grid;
+        grid-auto-columns: 1fr;
+        
+        .generic-row--cell {
+            grid-row: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding-block: 16px;
+            border-bottom: 1px solid white;
+            
+            mat-form-field {
+                width: 50px;
+            }
+            
+            ::ng-deep .mat-form-field-wrapper {
+                padding: 0;
+            }
+        }
+    }
+    
+    .turn-row {
+        display: grid;
+        grid-auto-columns: 1fr;
+        
+        .turn {
+            grid-row: 1;
+            padding-right: 32px;
+            text-align: right;
+            border-block: 1px solid white;
+            line-height: 2;
+        }
+    }
+    
+    .total-row {
+        display: grid;
+        grid-auto-columns: 1fr;
+        $background: map-get(theme-colors.$app-theme, background);
+        background-color: material-theming.mat-color($background, card);
+        
+        .total-score {
+            grid-row: 1;
+            padding-right: 32px;
+            text-align: right;
+            line-height: 2;
+            border-bottom: 1px solid white;
+        }
+    }
+}
+
+.buttons-container {
+    display: flex;
+    gap: 16px;
+    
+    &.split {
+        padding-top: 16px;
+        gap: 0;
+        justify-content: space-between;
+    }
+}

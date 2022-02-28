@@ -1,0 +1,12 @@
+@use "~@angular/material" as material-theming;
+@use "material-theme-colors" as theme-colors;
+
+@include material-theming.core();
+
+@include material-theming.all-component-themes(theme-colors.$app-theme);
+
+body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    $foreground: map-get(theme-colors.$app-theme, foreground);
+    color: material-theming.get-color-from-palette($foreground, text);
+}

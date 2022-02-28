@@ -1,0 +1,13 @@
+@mixin default {
+    :host {
+        display: block;
+        @content;
+    }
+}
+
+@mixin fullheight {
+    @include default {
+        height: 100%;
+        @content;
+    }
+}

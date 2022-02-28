@@ -1,0 +1,14 @@
+@use "src/vendor/ngx-host" as host;
+
+@include host.fullheight;
+
+.buttons-container {
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-icon {
+    order: -1;
+    margin-right: 16px;
+}

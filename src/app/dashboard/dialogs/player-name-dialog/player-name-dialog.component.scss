@@ -1,0 +1,11 @@
+@use "src/vendor/ngx-host";
+@use "src/vendor/ngx-material";
+
+@include ngx-host.fullheight;
+@include ngx-material.dialog-actions-justify-end;
+@include ngx-material.dialog-content-overflow-fix;
+
+form {
+    display: flex;
+    flex-direction: column;
+}

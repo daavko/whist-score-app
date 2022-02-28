@@ -1,0 +1,35 @@
+<mat-list>
+    <mat-list-item *ngFor="let player of players; first as first; last as last">
+        <mat-icon class="player-icon" matlisticon *ngIf="beginningPlayerId === player.id" svgIcon="star"></mat-icon>
+        <mat-icon class="player-icon" matlisticon *ngIf="beginningPlayerId !== player.id" svgIcon="star-outline"></mat-icon>
+        <p mat-line>{{ player.name }}</p>
+        <button mat-icon-button matTooltip="Rename" (click)="editPlayerName(player)">
+            <mat-icon svgIcon="pencil"></mat-icon>
+        </button>
+        <button mat-icon-button
+                matTooltip="Mark as beginning"
+                (click)="markPlayerBeginning(player)"
+                [disabled]="beginningPlayerId === player.id">
+            <mat-icon svgIcon="star"></mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Move up" (click)="movePlayerUp(player)" [disabled]="first">
+            <mat-icon svgIcon="chevron-up"></mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Move down" (click)="movePlayerDown(player)" [disabled]="last">
+            <mat-icon svgIcon="chevron-down"></mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Remove" color="warn" (click)="removePlayer(player)">
+            <mat-icon svgIcon="delete"></mat-icon>
+        </button>
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </mat-list-item>
+</mat-list>
+<div class="buttons-container">
+    <button mat-stroked-button color="accent" (click)="addPlayer()">
+        <mat-icon svgIcon="plus"></mat-icon>
+        <span>Add player</span>
+    </button>
+    <button mat-stroked-button color="accent" (click)="startGame()" [disabled]="players.length < 3 || beginningPlayerId === -1">
+        <span>Start game</span>
+    </button>
+</div>

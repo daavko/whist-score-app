@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@use "vendor/ngx-material-fixes";
+
+// General reset styles
+@import "vendor/reset";
+
+// Material theme
+@import "vendor/material-theme";
+
+@include ngx-material-fixes.all;

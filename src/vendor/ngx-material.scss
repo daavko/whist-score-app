@@ -1,0 +1,73 @@
+/*
+Utility styles for Angular Material
+ */
+
+@mixin button-spinner {
+    button.mat-button--with-spinner mat-spinner {
+        display: inline-block;
+        vertical-align: text-top;
+        margin-right: 8px;
+    }
+}
+
+@mixin extended-fab {
+    .mat-fab-button--extended {
+        width: unset;
+        height: 48px;
+        padding: 0 20px 0 12px;
+        border-radius: 29px;
+        
+        mat-icon {
+            margin-right: 12px;
+        }
+        
+        .mat-fab-button--extended__text {
+            font-weight: 400;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+    
+        // WebStorm throws a fit, because this isn't an Angular project, so it doesn't know about ::ng-deep
+        //noinspection CssInvalidPseudoSelector
+        ::ng-deep .mat-button-wrapper {
+            padding: 12px 0;
+        }
+    }
+}
+
+@mixin extended-fab-margined {
+    
+    @include extended-fab;
+    
+    button.mat-fab-button--extended {
+        margin: 16px;
+    }
+}
+
+@mixin dialog-actions-justify-end {
+    mat-dialog-actions {
+        justify-content: flex-end;
+    }
+}
+
+@mixin form-field-fullwidth {
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+@mixin dialog-content-overflow-fix {
+    mat-dialog-content {
+        overflow: initial;
+    }
+}
+
+@mixin dialog-form {
+    form > button[type=submit] {
+        display: none;
+    }
+    
+    @include dialog-content-overflow-fix;
+    @include dialog-actions-justify-end;
+    @include form-field-fullwidth;
+}
